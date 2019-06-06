@@ -3,7 +3,8 @@ require "rspec"
 
 ENV["RACK_ENV"] = "test"
 
-require File.expand_path "../../app.rb", __FILE__
+require File.expand_path "../../app/app.rb", __FILE__
+Dir["./spec/support/**/*.rb"].sort.each { |file| require file }
 
 module RSpecMixin
   include Rack::Test::Methods
@@ -13,4 +14,7 @@ module RSpecMixin
   end
 end
 
-RSpec.configure { |c| c.include RSpecMixin }
+RSpec.configure do |config|
+  config.include RSpecMixin
+  config.include Metanorma::StubHelper
+end
