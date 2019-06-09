@@ -15,10 +15,6 @@ class MetanormaRegistry < Sinatra::Base
       "Please check the documentation for the GraphQl API"
   end
 
-  get "/graphql" do
-    json(execute_graphql_schema(params))
-  end
-
   post "/graphql" do
     json(execute_graphql_schema(params))
   end
@@ -37,9 +33,11 @@ class MetanormaRegistry < Sinatra::Base
 
   private
 
-  def execute_graphql_schema(params)
-    MetanormaRegistrySchema.execute(
-      params[:query], variables: params[:variables], context: {}
-    )
+  def execute_graphql_schema(data)
+    context = {}
+    query = data["query"]
+    variables = data["variables"] || {}
+
+    MetanormaRegistrySchema.execute(query, variables: variables, context: context)
   end
 end 
