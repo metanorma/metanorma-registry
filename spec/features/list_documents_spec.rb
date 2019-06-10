@@ -9,7 +9,11 @@ RSpec.describe "List documents" do
           documents {
             id
             type
-            bibdata
+            bibdata {
+              type
+              status
+              docidentifier
+            }
             termdocsource
             preface
           }
@@ -25,7 +29,10 @@ RSpec.describe "List documents" do
       expect(last_response.status).to eq(200)
       expect(documents.first["id"]).to eq("cc-10010")
       expect(documents.first["type"]).to eq("csd-standard")
-      expect(documents.first[""])
+
+      expect(documents.first["bibdata"]["type"]).to eq("standard")
+      expect(documents.first["bibdata"]["status"]).to eq("final-draft")
+      expect(documents.first["bibdata"]["docidentifier"]).to eq("CC/FDS 10010:2019")
     end
   end
 end
