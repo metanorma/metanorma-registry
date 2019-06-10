@@ -12,8 +12,14 @@ RSpec.describe "List documents" do
             bibdata {
               type
               status
-              docidentifier
             }
+
+            sections  {
+              clause {
+                title
+              }
+            }
+
             termdocsource
             preface
           }
@@ -24,6 +30,7 @@ RSpec.describe "List documents" do
 
       response = JSON.parse(last_response.body)
       documents = response["data"]["documents"]
+      sections_clause = documents.first["sections"]["clause"]
 
       expect(documents.size).to eq(1)
       expect(last_response.status).to eq(200)
@@ -32,7 +39,8 @@ RSpec.describe "List documents" do
 
       expect(documents.first["bibdata"]["type"]).to eq("standard")
       expect(documents.first["bibdata"]["status"]).to eq("final-draft")
-      expect(documents.first["bibdata"]["docidentifier"]).to eq("CC/FDS 10010:2019")
+
+      expect(sections_clause.first["title"]).to eq("Scope")
     end
   end
 end
