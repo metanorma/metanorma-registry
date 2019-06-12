@@ -9,15 +9,7 @@ class Types::Document < Types::BaseObject
   field :bibdata, Types::BibData, null: true
   field :termdocsource, String, null: true
   field :preface, String, null: true
-  field :sections, Types::Section, null: false
+  field :sections, Types::Section, null: true
   field :annex, String, null: true
   field :bibliography, String, null: true
-
-  def bibdata
-    object["bibdata"]
-  end
-
-  def sections
-    object["sections"]
-  end
 end
