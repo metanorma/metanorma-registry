@@ -45,7 +45,7 @@ class Document
   #
   def metanorma_documents(start, offset)
     found_document = 0
-    counter = start || 0
+    counter = (start || 1) - 1
     documents_hash = []
 
     while counter < documents.length && found_document < offset
@@ -58,6 +58,7 @@ class Document
             documents_hash << document
           end
         else
+          break if counter >= (start + offset - 1)
           documents_hash << document
         end
       end

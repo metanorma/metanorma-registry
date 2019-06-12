@@ -14,7 +14,7 @@ class QueryType < GraphQL::Schema::Object
     argument :limit, Integer, required: false
   end
 
-  def documents(type: nil, start: 0, limit: 5)
+  def documents(type: nil, start: 1, limit: 5)
     Document.all(type, start, limit)
   end
 end
