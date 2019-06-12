@@ -1,3 +1,5 @@
+require_relative "term_section"
+
 class Types::Clause < Types::BaseObject
   field :p, String, null: true
   field :id, String, null: true
@@ -6,7 +8,11 @@ class Types::Clause < Types::BaseObject
   field :definitions, String, null: true
   field :obligation, String, null: true
   field :clause, [Types::Clause], null: true
-  field :terms, String, null: true
+  field :terms, [Types::TermSection], null: true
+
+  def terms
+    ensure_array_type(object["terms"])
+  end
 
   def p
     paragraph = object["p"]

@@ -12,7 +12,7 @@ class MetanormaRegistry < Sinatra::Base
 
   get "/" do
     "Welcome to the metanorma Registry! \n" \
-      "Please check the documentation for the GraphQl API"
+      "Please check documentation for using the GraphQl API at /graphql"
   end
 
   post "/graphql" do
@@ -40,4 +40,4 @@ class MetanormaRegistry < Sinatra::Base
 
     MetanormaRegistrySchema.execute(query, variables: variables, context: context)
   end
-end 
+end
