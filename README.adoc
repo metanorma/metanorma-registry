@@ -1,0 +1,113 @@
+= Metanorma Registry viewer
+
+The Metanorma Registry viewer is used for fetching
+particular data elements from a Collection.
+
+Experimental version available at: https://metanorma-registry.herokuapp.com/
+
+== Usage
+
+Use GraphiQL to connect https://metanorma-registry.herokuapp.com/graphql .
+A number of documents are available for querying.
+
+== Use cases
+
+=== Query standard collections
+
+"`List me all documents with title and id`" :
+
+[source,json]
+----
+{
+  documents {
+    id
+    bibdata { title }
+  }
+}
+----
+
+"`List all documents of this type`" :
+
+[source,json]
+----
+{
+  documents(type: "csd-standard", start: 1, limit: 2) {
+    id
+  }
+}
+----
+
+
+=== Query data elements within
+
+"`Give me all terms`" :
+
+[source,json]
+----
+{
+  documents(type: "csd-standard", start: 1, limit: 2) {
+    id
+    sections { clause { terms { term { preferred } } } }
+  }
+}
+----
+
+"`Give me all terms and definitions`":
+
+[source,json]
+----
+{
+  documents(type: "csd-standard", start: 1, limit: 2) {
+    id
+    sections { clause { terms { term {
+      preferred, obligation, definition { p }
+    } } } }
+  }
+}
+----
+
+
+"`Give me all clause titles`":
+
+[source,json]
+----
+{
+  documents(type: "csd-standard", limit: 2) {
+    id
+    sections { clause { title } }
+  }
+}
+----
+
+
+=== Query metadata within standards
+
+"`Give me state of publication and publication date`":
+
+[source,json]
+----
+{
+  documents(type: "csd-standard", limit: 2) {
+    id
+    bibdata {
+      title, status, edition
+      date { on, type }
+    }
+  }
+}
+----
+
+"`Give me all organization contributors and language`":
+
+[source,json]
+----
+{
+  documents(start: 1, limit: 2) {
+    bibdata {
+      contributor { organization { name } }
+      language
+    }
+  }
+}
+----
+
