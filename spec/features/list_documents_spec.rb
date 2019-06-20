@@ -47,7 +47,16 @@ RSpec.describe "List documents" do
             }
 
             termdocsource
-            preface
+            preface {
+              foreword {
+                title
+              }
+
+              introduction {
+                title
+                obligation
+              }
+            }
           }
         }
       MSG

@@ -3,6 +3,5 @@ class Types::Definition < Types::BaseObject
 end
 
 def p
-  paragraph = object["p"]
-  paragraph.is_a?(Array) ? paragraph.join("\n").to_s : nil
+  join_paragraphs(object["p"])
 end
