@@ -8,7 +8,7 @@ gem "rake"
 gem "rack-contrib"
 gem "sinatra"
 gem "sinatra-contrib"
-gem "activesupport"
+gem "activesupport", "~> 5.2"
 
 gem "rspec", group: :test
 gem "rack-test", group: :test
